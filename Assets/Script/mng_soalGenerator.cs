@@ -10,11 +10,15 @@ public class mng_soalGenerator : MonoBehaviour {
 	[Header("Properties")]
 	[SerializeField] int angka1;
 	[SerializeField] int angka2;
-	[SerializeField] int angkaJawab;
+	[SerializeField] public int angkaJawab;
 	[SerializeField] int operatorRand;
 
+	[Header("Manipulator")]
+	[SerializeField] int fixedAnsWhen = 4;
+	int ansLeftTillFixed;
 
 	void Start () {
+		ansLeftTillFixed = fixedAnsWhen;
 		StartCoroutine (IbuatSoal ());
 	}
 		
@@ -44,11 +48,21 @@ public class mng_soalGenerator : MonoBehaviour {
 		yield return 0;
 	}
 
-	void callBuatSoal () {
+	public void callBuatSoal () {
 		StartCoroutine (IbuatSoal ());
 	}
 
-	void stopBuatSoal () {
+	public void stopBuatSoal () {
 	 	StopCoroutine (IbuatSoal ());
+	}
+
+	public int generateJawaban() {
+		if (ansLeftTillFixed <= 0) {
+			ansLeftTillFixed = fixedAnsWhen;
+			return angkaJawab;
+		} else {
+			ansLeftTillFixed--;
+			return Random.Range (0, 9);
+		}
 	}
 }
