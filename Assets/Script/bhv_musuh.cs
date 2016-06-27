@@ -3,9 +3,6 @@ using System.Collections;
 
 public class bhv_musuh : MonoBehaviour {
 
-	//TODO : Buat child object buat nunjukkin angka yang dibawa musuh
-
-
 	[Header("Ref")]
 	[SerializeField] GameObject manager;
 	mng_soalGenerator soalManager;
@@ -15,6 +12,9 @@ public class bhv_musuh : MonoBehaviour {
 	[SerializeField] float speed = 5;
 	[SerializeField] int carriedAnswer;
 
+	[Header("Child Object Prop")]
+	[SerializeField] Sprite[] arr_angka;
+
 	void Start(){
 		if (manager == null) { //Init Ref GameObject Manager
 			manager = GameObject.Find ("GameManager").gameObject;
@@ -23,6 +23,7 @@ public class bhv_musuh : MonoBehaviour {
 		soalManager = manager.GetComponent<mng_soalGenerator> ();
 		statManager = manager.GetComponent<mng_playerStat> ();
 		carriedAnswer = soalManager.generateJawaban ();
+		this.gameObject.transform.FindChild("obj_CarrierAngka").GetComponent<SpriteRenderer>().sprite = arr_angka [carriedAnswer];
 	}
 
 	void Update () {
