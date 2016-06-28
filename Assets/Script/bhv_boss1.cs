@@ -1,7 +1,10 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 
 public class bhv_boss1 : MonoBehaviour {
+
+	//TODO : Evaluasi Behavior/mekanik si Boss
 
 	[Header("Ref")]
 	[SerializeField] GameObject manager;
@@ -37,8 +40,12 @@ public class bhv_boss1 : MonoBehaviour {
 			manager = GameObject.Find ("GameManager").gameObject;
 		}
 
+		GameObject.Find ("Spawner").gameObject.SetActive (false); //TODO : Code sementara buat matiin spawner pas boss muncul
+
 		soalManager = manager.GetComponent<mng_soalGenerator> ();
 		statManager = manager.GetComponent<mng_playerStat> ();
+		statManager.enableUInyawaBoss (true);
+		statManager.refreshUInyawaBoss (nyawaBoss);
 		originalPos = this.transform.position;
 		RegenJawaban ();
 		StartCoroutine (IBehaviorBoss());
@@ -90,16 +97,22 @@ public class bhv_boss1 : MonoBehaviour {
 		}
 	}
 
-	void HitBoxHit(int carriedAnswer){
+	void HitBoxHit(int carriedAnswer){ //Pass weakspotnya hit --> do something
 		if (soalManager.angkaJawab == carriedAnswer) {
 			statManager.tambahScore ();
 			soalManager.callBuatSoal ();
 			nyawaBoss--;
+			statManager.refreshUInyawaBoss (nyawaBoss);
 			RegenJawaban ();
+			if (nyawaBoss <= 0) {
+				statManager.enableUInyawaBoss (false);
+				Destroy (this.gameObject);
+			}
 		} else {
 			statManager.kurangScore ();
 			soalManager.callBuatSoal ();
 			RegenJawaban ();
 		}
 	}
+		
 }
