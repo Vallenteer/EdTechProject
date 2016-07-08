@@ -40,10 +40,12 @@ public class bhv_musuh : MonoBehaviour {
 			if (soalManager.angkaJawab == carriedAnswer) {
 				statManager.tambahScore ();
 				soalManager.callBuatSoal ();
+				Destroy (other.gameObject);
 				Destroy (this.gameObject);
 			} else {
 				statManager.kurangScore ();
 				soalManager.callBuatSoal ();
+				Destroy (other.gameObject);
 				Destroy (this.gameObject); //TODO : hapus baris ini, kalo pas salah, musuhnya tetep ada
 			}
 		}

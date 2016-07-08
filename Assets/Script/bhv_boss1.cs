@@ -10,9 +10,11 @@ public class bhv_boss1 : MonoBehaviour {
 	[SerializeField] GameObject manager;
 	mng_soalGenerator soalManager;
 	mng_playerStat statManager;
+	bhv_spawner spawnManager;
 
 	[Header("Properties")]
 	[SerializeField] int nyawaBoss = 3;
+	[SerializeField] int carriedScore = 100;
 	[SerializeField] float timeBeforeRefreshMin = 10;
 	[SerializeField] float timeBeforeRefreshMax = 15;
 	[SerializeField] float offsetYMax = 10;
@@ -40,7 +42,7 @@ public class bhv_boss1 : MonoBehaviour {
 			manager = GameObject.Find ("GameManager").gameObject;
 		}
 
-		GameObject.Find ("Spawner").gameObject.SetActive (false); //TODO : Code sementara buat matiin spawner pas boss muncul
+		spawnManager = manager.transform.Find ("Spawner").GetComponent<bhv_spawner> ();
 
 		soalManager = manager.GetComponent<mng_soalGenerator> ();
 		statManager = manager.GetComponent<mng_playerStat> ();
@@ -105,7 +107,9 @@ public class bhv_boss1 : MonoBehaviour {
 			statManager.refreshUInyawaBoss (nyawaBoss);
 			RegenJawaban ();
 			if (nyawaBoss <= 0) {
+				statManager.tambahScore (carriedScore);
 				statManager.enableUInyawaBoss (false);
+				spawnManager.changeBossTimeState ();
 				Destroy (this.gameObject);
 			}
 		} else {

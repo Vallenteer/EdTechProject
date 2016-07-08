@@ -18,6 +18,11 @@ public class bhv_projectileMusuh : MonoBehaviour {
 	void OnTriggerEnter2D(Collider2D other){
 		if (other.CompareTag ("Player")) {
 			statManager.kurangNyawa ();
+			Destroy (this.gameObject);
+		}
+
+		if(other.CompareTag("Destroyer")){
+			Destroy(this.gameObject);
 		}
 	}
 }
