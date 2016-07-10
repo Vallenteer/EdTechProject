@@ -52,9 +52,9 @@ public class bhv_spawner : MonoBehaviour {
 
 	void spawnMusuhNormal(){
 		int randomizer = Random.Range (0, arrSize-1);
-		Instantiate (obj[randomizer], this.transform.position
-			+ new Vector3 (Random.Range (locMin.x, locMax.x), Random.Range (locMin.y, locMax.y), 0),
-			obj[randomizer].transform.rotation);
+		Instantiate (obj [randomizer], this.transform.position
+		+ new Vector3 (Random.Range (locMin.x, locMax.x), Random.Range (locMin.y, locMax.y), 0),
+		obj[randomizer].transform.rotation);
 	}
 
 	void spawnBoss(){
