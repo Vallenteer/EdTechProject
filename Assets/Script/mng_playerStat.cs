@@ -8,6 +8,9 @@ public class mng_playerStat : MonoBehaviour {
 	[SerializeField] GameObject spawner;
 	bhv_spawner spawnerScript;
 
+	[Header("Scene Tracker")]
+	[SerializeField] int sceneKe = 1; //level ke-
+
 	[Header("Game Status")]
 	[SerializeField] int nyawa = 3;
 	[SerializeField] int score;
@@ -62,6 +65,14 @@ public class mng_playerStat : MonoBehaviour {
 
 	public void refreshUInyawaBoss(int n){
 		ui_textNyawaBoss.text = n.ToString();
+	}
+
+	public void setSceneKe(int n){
+		sceneKe = n;
+	}
+
+	public int getSceneKe(){
+		return sceneKe;
 	}
 
 }
