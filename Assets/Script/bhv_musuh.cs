@@ -4,6 +4,8 @@ using System.Collections;
 public class bhv_musuh : MonoBehaviour {
 
 	[Header("Ref")]
+	[SerializeField] GameObject hitbyprojectile;
+	[SerializeField] GameObject playerhit;
 	[SerializeField] GameObject manager;
 	mng_soalGenerator soalManager;
 	mng_playerStat statManager;
@@ -33,6 +35,7 @@ public class bhv_musuh : MonoBehaviour {
 	void OnCollisionEnter2D(Collision2D other){
 		if (other.gameObject.CompareTag ("Player")) {
 			statManager.kurangNyawa();
+			Instantiate (playerhit);
 			Destroy (this.gameObject);
 		}
 
@@ -48,6 +51,7 @@ public class bhv_musuh : MonoBehaviour {
 				Destroy (other.gameObject);
 				Destroy (this.gameObject); //TODO : hapus baris ini, kalo pas salah, musuhnya tetep ada
 			}
+			Instantiate (hitbyprojectile);
 		}
 
 	}

@@ -5,6 +5,7 @@ public class bhv_projectileMusuh : MonoBehaviour {
 
 	[Header("Ref")]
 	[SerializeField] GameObject manager;
+	[SerializeField] GameObject playerhit;
 	mng_playerStat statManager;
 
 	void Start(){
@@ -18,6 +19,7 @@ public class bhv_projectileMusuh : MonoBehaviour {
 	void OnTriggerEnter2D(Collider2D other){
 		if (other.CompareTag ("Player")) {
 			statManager.kurangNyawa ();
+			Instantiate (playerhit);
 			Destroy (this.gameObject);
 		}
 
