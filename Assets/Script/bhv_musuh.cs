@@ -25,7 +25,10 @@ public class bhv_musuh : MonoBehaviour {
 		soalManager = manager.GetComponent<mng_soalGenerator> ();
 		statManager = manager.GetComponent<mng_playerStat> ();
 		carriedAnswer = soalManager.generateJawaban ();
-		this.gameObject.transform.FindChild("obj_CarrierAngka").GetComponent<SpriteRenderer>().sprite = arr_angka [carriedAnswer];
+		int carriedAnswer1 = carriedAnswer / 10;
+		int carriedAnswer2 = carriedAnswer - (carriedAnswer1 * 10);
+		this.gameObject.transform.FindChild ("obj_CarrierAngka1").GetComponent<SpriteRenderer> ().sprite = arr_angka [carriedAnswer1];
+		this.gameObject.transform.FindChild ("obj_CarrierAngka2").GetComponent<SpriteRenderer>().sprite = arr_angka [carriedAnswer2];
 	}
 
 	void Update () {

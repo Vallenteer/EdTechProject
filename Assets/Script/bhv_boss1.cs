@@ -13,6 +13,7 @@ public class bhv_boss1 : MonoBehaviour {
 	bhv_spawner spawnManager;
 
 	[Header("Properties")]
+	[SerializeField] bool endlessModeBoss = false;
 	[SerializeField] int nyawaBoss = 3;
 	[SerializeField] int carriedScore = 100;
 	[SerializeField] float timeBeforeRefreshMin = 10;
@@ -31,7 +32,7 @@ public class bhv_boss1 : MonoBehaviour {
 	[SerializeField] float projectileOffsetMin = 0;
 
 	[Header("Child Object Prop")]
-	[SerializeField] Sprite[] arr_angka;
+	[SerializeField] public Sprite[] arr_angka;
 	[SerializeField] GameObject[] childObj;
 	[SerializeField] int carriedAnswer1;
 	[SerializeField] int carriedAnswer2;
@@ -55,7 +56,12 @@ public class bhv_boss1 : MonoBehaviour {
 	}
 
 	void Update() {
-		if (this.transform.position.y > originalPos.y + offsetYMax || this.transform.position.y < originalPos.y - offsetYMin  ) {
+
+		if (this.GetComponent<Animator> ().GetCurrentAnimatorStateInfo (0).IsTag ("Idle")) { //Matiin animator biar bisa digerakin via script
+			this.GetComponent<Animator> ().enabled = false;
+		}
+
+		if (!(this.transform.position.y < originalPos.y + offsetYMax && this.transform.position.y > originalPos.y - offsetYMin)) {
 			speed *= speedDir;
 		}
 
@@ -69,9 +75,9 @@ public class bhv_boss1 : MonoBehaviour {
 		childObj[0].GetComponent<bhv_hitboxBoss1>().CarriedAnswer = carriedAnswer1;
 		childObj[1].GetComponent<bhv_hitboxBoss1>().CarriedAnswer = carriedAnswer2;
 		childObj[2].GetComponent<bhv_hitboxBoss1>().CarriedAnswer = carriedAnswer3;
-		childObj [0].GetComponent<SpriteRenderer> ().sprite = arr_angka [carriedAnswer1];
-		childObj [1].GetComponent<SpriteRenderer> ().sprite = arr_angka [carriedAnswer2];
-		childObj [2].GetComponent<SpriteRenderer> ().sprite = arr_angka [carriedAnswer3];
+		childObj[0].GetComponent<bhv_hitboxBoss1>().refreshAngka();
+		childObj[1].GetComponent<bhv_hitboxBoss1>().refreshAngka();
+		childObj[2].GetComponent<bhv_hitboxBoss1>().refreshAngka();
 	}
 
 	IEnumerator IBehaviorBoss(){
@@ -83,13 +89,14 @@ public class bhv_boss1 : MonoBehaviour {
 
 	IEnumerator IBehaviorBoss2(){
 		while (true) {
+			yield return new WaitForSeconds (Random.Range (cooldownMin, cooldownMax)); //<< biar ga langsung nembak
 			float posMin = this.transform.position.y - projectileOffsetMin;
 			float posMax = this.transform.position.y + projectileOffsetMax;
 			Instantiate (
 				projectile,
 				this.transform.position + new Vector3 (0, Random.Range (posMin,posMax), 0),
 				projectile.transform.rotation);
-			yield return new WaitForSeconds (Random.Range (cooldownMin, cooldownMax));
+			//yield return new WaitForSeconds (Random.Range (cooldownMin, cooldownMax));
 		}
 	}
 
@@ -109,7 +116,11 @@ public class bhv_boss1 : MonoBehaviour {
 			if (nyawaBoss <= 0) {
 				statManager.tambahScore (carriedScore);
 				statManager.enableUInyawaBoss (false);
-				spawnManager.changeBossTimeState ();
+				if (endlessModeBoss) {
+					spawnManager.changeBossTimeState ();
+				} else {
+					statManager.loadNextLevel (); //load level selanjutnya
+				}
 				Destroy (this.gameObject);
 			}
 		} else {

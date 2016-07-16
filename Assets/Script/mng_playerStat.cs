@@ -6,23 +6,32 @@ public class mng_playerStat : MonoBehaviour {
 
 	[Header("Ref")]
 	[SerializeField] GameObject spawner;
+	[SerializeField] GameObject sceneManager;
 	bhv_spawner spawnerScript;
-
-	[Header("Scene Tracker")]
-	[SerializeField] int sceneKe = 1; //level ke-
+	public mng_sceneManager sceneScript;
 
 	[Header("Game Status")]
 	[SerializeField] int nyawa = 3;
 	[SerializeField] int score;
 
 	[Header("Trigger Prop")]
+	[SerializeField] bool endlessMode = false;
 	[SerializeField] int scoreTreshold = 100; //Pas dapet berapa si boss bakal ke trigger
-	[SerializeField] int scoreScaling = 200; //treshold nambah berapa abis bossnya mati
+	[SerializeField] int scoreScaling = 200; //treshold nambah berapa abis bossnya mati (ga terlalu dipake kalau bukan endless mode)
 
 	[Header("UI Text Object")]
 	[SerializeField] Text ui_textNyawa;
 	[SerializeField] Text ui_textScore;
 	[SerializeField] Text ui_textNyawaBoss;
+
+	[Header("Scene Tracker")]
+	[SerializeField] int levelKe = 1; //level ke-
+	[SerializeField] int nextLevelToLoad = 2;
+
+	void Awake(){
+		sceneManager = GameObject.Find ("SceneManager");
+		sceneScript = sceneManager.GetComponent<mng_sceneManager> ();
+	}
 
 	void Start () {
 		ui_textNyawa.text = nyawa.ToString ();
@@ -36,6 +45,12 @@ public class mng_playerStat : MonoBehaviour {
 		if (!spawnerScript.bossSpawned && score >= scoreTreshold) {
 			spawnerScript.changeBossTimeState ();
 			scoreTreshold += scoreScaling;
+		}
+
+		if (nyawa <= 0) {
+			Debug.Log ("GameOver");
+			sceneScript.passed_score = score;
+			sceneScript.loadGameOver (); //pas mati
 		}
 	}
 		
@@ -67,12 +82,17 @@ public class mng_playerStat : MonoBehaviour {
 		ui_textNyawaBoss.text = n.ToString();
 	}
 
-	public void setSceneKe(int n){
-		sceneKe = n;
+	public int getLevelKe(){
+		return levelKe;
 	}
 
-	public int getSceneKe(){
-		return sceneKe;
+	public void loadNextLevel(){
+		if (endlessMode && levelKe < 3) {
+			levelKe++;
+			nextLevelToLoad++;
+		} else {
+			sceneScript.loadNextLevel (nextLevelToLoad);
+		}
 	}
-
+		
 }

@@ -13,6 +13,9 @@ public class bhv_spawner : MonoBehaviour {
 	[SerializeField] Vector2 locMin;
 	[SerializeField] Vector2 locMax;
 
+	[Header("Boss Spawn Location Offset")]
+	[SerializeField] Vector2 bosslocOffset;
+
 	[Header("Spawn Manipulator")]
 	[SerializeField] bool bossTime = false;
 	public bool bossSpawned = false;
@@ -59,6 +62,8 @@ public class bhv_spawner : MonoBehaviour {
 
 	void spawnBoss(){
 		int randomizer = Random.Range (0, arrSizeBoss-1);
-		Instantiate (obj_boss[randomizer], this.transform.position, obj_boss[randomizer].transform.rotation);
+		Instantiate (obj_boss[randomizer], 
+			this.transform.position + new Vector3 (bosslocOffset.x, bosslocOffset.y, 0),
+			obj_boss[randomizer].transform.rotation);
 	}
 }
