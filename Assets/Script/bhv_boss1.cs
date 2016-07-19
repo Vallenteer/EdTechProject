@@ -58,7 +58,8 @@ public class bhv_boss1 : MonoBehaviour {
 	void Update() {
 
 		if (this.GetComponent<Animator> ().GetCurrentAnimatorStateInfo (0).IsTag ("Idle")) { //Matiin animator biar bisa digerakin via script
-			this.GetComponent<Animator> ().enabled = false;
+			//this.GetComponent<Animator> ().enabled = false;
+			this.GetComponent<Animator>().applyRootMotion = true;
 		}
 
 		if (!(this.transform.position.y < originalPos.y + offsetYMax && this.transform.position.y > originalPos.y - offsetYMin)) {

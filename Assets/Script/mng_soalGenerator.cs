@@ -128,7 +128,11 @@ public class mng_soalGenerator : MonoBehaviour {
 			return angkaJawab;
 		} else {
 			ansLeftTillFixed--;
-			return Random.Range (0, 81); //max num == 81 (9x9)
+			if (angkaJawab <= 12) {
+				return Random.Range (0, 12);
+			} else {
+				return Random.Range (angkaJawab-10, angkaJawab+9); //max num == 81 (9x9), max Rand =90
+			}
 		}
 	}
 }
