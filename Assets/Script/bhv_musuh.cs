@@ -10,8 +10,6 @@ public class bhv_musuh : MonoBehaviour {
 	mng_soalGenerator soalManager;
 	mng_playerStat statManager;
 
-	//BGM
-	[SerializeField] GameObject BGM;
 
 	[Header("Properties")]
 	[SerializeField] float speed = 5;
@@ -24,9 +22,7 @@ public class bhv_musuh : MonoBehaviour {
 		if (manager == null) { //Init Ref GameObject Manager
 			manager = GameObject.Find ("GameManager").gameObject;
 		}
-		if (!GameObject.FindGameObjectWithTag ("BGM")) {
-			DontDestroyOnLoad (Instantiate (BGM));
-		}
+
 		soalManager = manager.GetComponent<mng_soalGenerator> ();
 		statManager = manager.GetComponent<mng_playerStat> ();
 		carriedAnswer = soalManager.generateJawaban ();
