@@ -3,6 +3,7 @@ using System.Collections;
 
 public class anim_callscene : MonoBehaviour {
 	public mng_sceneManager sceneManager;
+	[SerializeField] GameObject canvas;
 	// Use this for initialization
 	void Start () {
 		sceneManager =GameObject.Find("SceneManager").GetComponent<mng_sceneManager> ();
@@ -16,5 +17,9 @@ public class anim_callscene : MonoBehaviour {
 
 	public void callMng_Scene(int param){
 		sceneManager.loadNextLevel (param);
+	}
+	public void hidecanvas ()
+	{
+		canvas.SetActive (false);
 	}
 }
