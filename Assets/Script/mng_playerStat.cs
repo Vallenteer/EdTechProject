@@ -35,6 +35,11 @@ public class mng_playerStat : MonoBehaviour {
 	}
 
 	void Start () {
+		if (levelKe != 1) {
+			score = sceneScript.passed_score;
+		} else {
+			score = 0;
+		}
 		ui_textNyawa.text = nyawa.ToString ();
 		ui_textScore.text = score.ToString ();
 		textNyawaBoss.gameObject.SetActive(false);
@@ -94,6 +99,7 @@ public class mng_playerStat : MonoBehaviour {
 			levelKe++;
 			nextLevelToLoad++;
 		} else {
+			sceneScript.passed_score = score; //pass score
 			sceneScript.loadNextLevel (nextLevelToLoad);
 		}
 	}
