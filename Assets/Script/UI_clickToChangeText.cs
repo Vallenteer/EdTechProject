@@ -4,6 +4,7 @@ using System.Collections;
 
 public class UI_clickToChangeText : MonoBehaviour {
 
+	[SerializeField] GameObject gatotAnimation;
 	[SerializeField] Text[] textList;
 	int activatedObj = 0;
 
@@ -15,16 +16,19 @@ public class UI_clickToChangeText : MonoBehaviour {
 		if (textList [activatedObj] != null) {
 			textList [activatedObj].gameObject.SetActive (true);
 		}
+
+		gatotAnimation.SetActive(false);
 	}
 	
 	void Update () {
-		if (Input.GetMouseButton (0)) {
+		if (Input.GetMouseButtonUp (0)) {
 			textList [activatedObj].gameObject.SetActive (false);
 			activatedObj++;
-			if (textList [activatedObj] != null) {
+			if (textList.Length>activatedObj) {
 				textList [activatedObj].gameObject.SetActive (true);
 			} else {
-				Debug.Log ("Text abis");
+				gatotAnimation.SetActive(true);
+				//Debug.Log ("Text abis");
 			}
 		}
 	}

@@ -30,6 +30,8 @@ public class bhv_boss1 : MonoBehaviour {
 	[SerializeField] float cooldownMax = 7;
 	[SerializeField] float projectileOffsetMax = 0;
 	[SerializeField] float projectileOffsetMin = 0;
+	[SerializeField] float offsetProjectileX = 0;
+	[SerializeField] float offsetProjectileY = 0;
 
 	[Header("Child Object Prop")]
 	[SerializeField] public Sprite[] arr_angka;
@@ -93,9 +95,11 @@ public class bhv_boss1 : MonoBehaviour {
 			yield return new WaitForSeconds (Random.Range (cooldownMin, cooldownMax)); //<< biar ga langsung nembak
 			float posMin = this.transform.position.y - projectileOffsetMin;
 			float posMax = this.transform.position.y + projectileOffsetMax;
+			Vector3 thisPos = this.transform.position;
 			Instantiate (
 				projectile,
-				this.transform.position + new Vector3 (0, Random.Range (posMin,posMax), 0),
+				//this.transform.position + new Vector3 (0, Random.Range (posMin,posMax), 0),
+				new Vector3(thisPos.x + offsetProjectileX ,thisPos.y + offsetProjectileY,0),
 				projectile.transform.rotation);
 			//yield return new WaitForSeconds (Random.Range (cooldownMin, cooldownMax));
 		}

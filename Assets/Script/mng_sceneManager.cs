@@ -25,6 +25,10 @@ public class mng_sceneManager : MonoBehaviour {
 		}
 	}
 
+	void Start(){
+		Camera.main.aspect = 16f/9f;
+	}
+
 	//TODO : Rubah metode load scene, kalau terpaksa pakai build index num
 
 	public void loadNextLevel(int n){
@@ -38,11 +42,13 @@ public class mng_sceneManager : MonoBehaviour {
 	}
 
 	public void loadStoryScene(int n){
-		SceneManager.LoadScene (StoryScene [n - 1].name);
+		//SceneManager.LoadScene (StoryScene [n - 1].name);
+		SceneManager.LoadScene (n);
 	}
 
 	public void loadFinalScoreScene(){
-		SceneManager.LoadScene (FinalScoreScene.name);
+		//SceneManager.LoadScene (FinalScoreScene.name);
+		SceneManager.LoadScene (4);
 	}
 
 	public void loadMenuScene(){
