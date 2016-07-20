@@ -22,6 +22,7 @@ public class mng_playerStat : MonoBehaviour {
 	[Header("UI Text Object")]
 	[SerializeField] Text ui_textNyawa;
 	[SerializeField] Text ui_textScore;
+	[SerializeField] GameObject textNyawaBoss;
 	[SerializeField] Text ui_textNyawaBoss;
 
 	[Header("Scene Tracker")]
@@ -36,7 +37,9 @@ public class mng_playerStat : MonoBehaviour {
 	void Start () {
 		ui_textNyawa.text = nyawa.ToString ();
 		ui_textScore.text = score.ToString ();
-		ui_textNyawaBoss.gameObject.SetActive(false);
+		textNyawaBoss.gameObject.SetActive(false);
+		ui_textNyawaBoss = textNyawaBoss.transform.Find ("ui_NyawaBoss").gameObject.GetComponent<Text> ();
+
 
 		spawnerScript = spawner.GetComponent<bhv_spawner> ();
 	}
@@ -75,7 +78,7 @@ public class mng_playerStat : MonoBehaviour {
 	}
 
 	public void enableUInyawaBoss(bool act){
-		ui_textNyawaBoss.gameObject.SetActive (act);
+		textNyawaBoss.gameObject.SetActive (act);
 	}
 
 	public void refreshUInyawaBoss(int n){
