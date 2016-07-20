@@ -25,12 +25,16 @@ public class mng_sceneManager : MonoBehaviour {
 		}
 	}
 
+	//TODO : Rubah metode load scene, kalau terpaksa pakai build index num
+
 	public void loadNextLevel(int n){
-		SceneManager.LoadScene (LevelScene [n - 1].name);
+		//SceneManager.LoadScene (LevelScene [n - 1].name);
+		SceneManager.LoadScene (n);
 	}
 
 	public void loadGameOver(){
-		SceneManager.LoadScene (GameOverScene.name);
+		//SceneManager.LoadScene (GameOverScene.name);
+		SceneManager.LoadScene (4);
 	}
 
 	public void loadStoryScene(int n){
@@ -42,7 +46,8 @@ public class mng_sceneManager : MonoBehaviour {
 	}
 
 	public void loadMenuScene(){
-		SceneManager.LoadScene (menuScene.name);
+		//SceneManager.LoadScene (menuScene.name);
+		SceneManager.LoadScene (0);
 	}
 
 	public void changePauseState(bool state){ //opsional kalau mau pause game

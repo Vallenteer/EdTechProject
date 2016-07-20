@@ -7,9 +7,15 @@ public class bhv_gerakKarakter : MonoBehaviour {
 
 	[Header("Projectile")]
 	[SerializeField] GameObject projectile;
+	[SerializeField] GameObject cooldownText;
+	[SerializeField] Sprite[] cooldownSprite;
 	[SerializeField] Vector3 projectileOffset;
-	[SerializeField] float cooldownTime = 2f;
+	[SerializeField] int cooldownTime = 2;
 	[SerializeField] bool cooldownState; //True for in cooldown
+
+	void Start(){
+		cooldownText.SetActive (false);
+	}
 
 	void FixedUpdate () {
 		//Ikutin gerak mouse
@@ -28,7 +34,13 @@ public class bhv_gerakKarakter : MonoBehaviour {
 	}
 
 	IEnumerator coolDownProjectile(){
-		yield return new WaitForSeconds(cooldownTime);
+		cooldownText.SetActive (true);
+		for (int waitTime = cooldownTime; waitTime > 0; waitTime--) {
+			cooldownText.GetComponent<SpriteRenderer> ().sprite = cooldownSprite [waitTime];
+			yield return new WaitForSeconds(1f);
+		}
+		cooldownText.SetActive (false);
 		cooldownState = false;
+
 	}
 }
