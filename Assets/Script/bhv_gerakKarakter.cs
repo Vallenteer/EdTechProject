@@ -18,11 +18,14 @@ public class bhv_gerakKarakter : MonoBehaviour {
 	}
 
 	void FixedUpdate () {
+		
 		//Ikutin gerak mouse
 		mousePos = new Vector2 (Camera.main.ScreenToWorldPoint (Input.mousePosition).x, Camera.main.ScreenToWorldPoint (Input.mousePosition).y);
 		this.transform.position = (Vector3) mousePos;
-
-		if (Input.GetMouseButtonDown(0) && !cooldownState) {
+		if (Input.touchCount > 0) {
+			this.transform.position = (Vector3)Input.GetTouch(0).position;
+		}
+		if (Input.GetMouseButtonUp(0) && !cooldownState) {
 			Tembak ();
 		}
 	}

@@ -29,9 +29,9 @@ public class mng_csv : MonoBehaviour {
 		rowDataTemp [0] = soal;
 		rowDataTemp [1] = jawabanBenar;
 		rowDataTemp [2] = jawabanYangdijawab;
-		Debug.Log (soal + jawabanBenar + jawabanYangdijawab);
+		//Debug.Log (soal + jawabanBenar + jawabanYangdijawab);
 		rowData.Add (new string[]{soal, jawabanBenar, jawabanYangdijawab});
-		Debug.Log (rowDataTemp);
+		//Debug.Log (rowDataTemp);
 	}
 
 	public void Savecsv() { 
