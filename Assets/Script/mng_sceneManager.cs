@@ -26,7 +26,7 @@ public class mng_sceneManager : MonoBehaviour {
 	}
 
 	void Start(){
-		Camera.main.aspect = 16f/9f;
+		//Camera.main.aspect = 16f/9f;
 	}
 
 	//TODO : Rubah metode load scene, kalau terpaksa pakai build index num
