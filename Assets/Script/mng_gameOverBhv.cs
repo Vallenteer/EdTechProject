@@ -12,6 +12,8 @@ public class mng_gameOverBhv : MonoBehaviour {
 	}
 
 	public void backToMenu(){
+		GameObject.Find ("SceneManager").GetComponent<mng_csv> ().Savecsv ();
+		GameObject.Find ("SceneManager").GetComponent<mng_csv> ().clearData();
 		sceneScript.loadMenuScene ();
 	}
 }

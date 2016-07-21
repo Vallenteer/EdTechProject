@@ -9,6 +9,8 @@ public class mng_playerStat : MonoBehaviour {
 	[SerializeField] GameObject sceneManager;
 	bhv_spawner spawnerScript;
 	public mng_sceneManager sceneScript;
+	public mng_csv csvManager;
+
 
 	[Header("Game Status")]
 	[SerializeField] int nyawa = 3;
@@ -32,6 +34,7 @@ public class mng_playerStat : MonoBehaviour {
 	void Awake(){
 		sceneManager = GameObject.Find ("SceneManager");
 		sceneScript = sceneManager.GetComponent<mng_sceneManager> ();
+		csvManager = sceneManager.GetComponent<mng_csv> ();
 	}
 
 	void Start () {

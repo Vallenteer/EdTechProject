@@ -135,4 +135,13 @@ public class mng_soalGenerator : MonoBehaviour {
 			}
 		}
 	}
+
+	//CSV Related
+	public string getSoalText(){
+		return ui_text.text.ToString ();
+	}
+
+	public string getJawabanText(){
+		return angkaJawab.ToString ();
+	}
 }

@@ -32,12 +32,14 @@ public class mng_csv : MonoBehaviour {
 		rowData.Add (rowDataTemp);
 	}
 
-	void Savecsv() { 
+	public void Savecsv() { 
 		string filePath = getPath ();
 		string[][] output = new string[rowData.Count][]; 
 	
 		for(int i = 0; i < output.Length; i++){
 			output[i] = rowData[i];
+			Debug.Log(rowData[i].GetValue(0));
+			//rowData[i] = output[i];
 		}
 			
 		int length = output.GetLength(0);  
@@ -61,5 +63,11 @@ public class mng_csv : MonoBehaviour {
 		#else
 		return Application.dataPath +"/"+namaFile;
 		#endif
+	}
+
+	public void clearData(){
+		Debug.Log (rowData[0].GetValue(0));
+		Debug.Log (rowData[1].GetValue(0));
+		rowData.Clear ();
 	}
 }

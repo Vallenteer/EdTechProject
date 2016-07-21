@@ -44,6 +44,9 @@ public class bhv_musuh : MonoBehaviour {
 		}
 
 		if (other.gameObject.CompareTag ("Projectile")) {
+			//csv
+			statManager.csvManager.AddData (soalManager.getSoalText(), soalManager.getJawabanText(), carriedAnswer.ToString());
+
 			if (soalManager.angkaJawab == carriedAnswer) {
 				statManager.tambahScore ();
 				soalManager.callBuatSoal ();
@@ -55,6 +58,7 @@ public class bhv_musuh : MonoBehaviour {
 				Destroy (other.gameObject);
 				Destroy (this.gameObject); //TODO : hapus baris ini, kalo pas salah, musuhnya tetep ada
 			}
+
 			Instantiate (hitbyprojectile);
 		}
 
