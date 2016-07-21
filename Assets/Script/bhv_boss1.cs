@@ -24,6 +24,7 @@ public class bhv_boss1 : MonoBehaviour {
 	[SerializeField] float offsetYMax = 10;
 	[SerializeField] float offsetYMin = 10;
 	[SerializeField] float speed = 2;
+	[SerializeField] float timeBeforeChangeDir = 1.5f;
 	float speedDir = -1;
 	Vector3 originalPos;
 
@@ -58,6 +59,7 @@ public class bhv_boss1 : MonoBehaviour {
 		RegenJawaban ();
 		StartCoroutine (IBehaviorBoss());
 		StartCoroutine (IBehaviorBoss2 ());
+		StartCoroutine (IBehaviorBoss3 ());
 	}
 
 	void Update() {
@@ -67,9 +69,11 @@ public class bhv_boss1 : MonoBehaviour {
 			this.GetComponent<Animator>().applyRootMotion = true;
 		}
 
-		if (!(this.transform.position.y < originalPos.y + offsetYMax && this.transform.position.y > originalPos.y - offsetYMin)) {
+		/*if (!(this.transform.position.y < originalPos.y + offsetYMax && this.transform.position.y > originalPos.y - offsetYMin)) {
 			speed *= speedDir;
-		}
+		}*/
+
+
 
 		this.transform.Translate (new Vector3 (0, speed, 0) * Time.deltaTime);
 	}
@@ -105,6 +109,22 @@ public class bhv_boss1 : MonoBehaviour {
 				new Vector3(thisPos.x + offsetProjectileX ,thisPos.y + offsetProjectileY,0),
 				projectile.transform.rotation);
 			//yield return new WaitForSeconds (Random.Range (cooldownMin, cooldownMax));
+		}
+	}
+
+	IEnumerator IBehaviorBoss3(){
+		bool b = true;
+		while (true) {
+			if (b) {
+				b = !b;
+				yield return new WaitForSeconds (timeBeforeChangeDir/2);
+				speed *= speedDir;
+
+			} else {
+				speed *= speedDir;
+				yield return new WaitForSeconds (timeBeforeChangeDir * 2);
+
+			}
 		}
 	}
 
