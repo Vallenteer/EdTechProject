@@ -29,7 +29,9 @@ public class mng_csv : MonoBehaviour {
 		rowDataTemp [0] = soal;
 		rowDataTemp [1] = jawabanBenar;
 		rowDataTemp [2] = jawabanYangdijawab;
-		rowData.Add (rowDataTemp);
+		Debug.Log (soal + jawabanBenar + jawabanYangdijawab);
+		rowData.Add (new string[]{soal, jawabanBenar, jawabanYangdijawab});
+		Debug.Log (rowDataTemp);
 	}
 
 	public void Savecsv() { 
@@ -38,7 +40,7 @@ public class mng_csv : MonoBehaviour {
 	
 		for(int i = 0; i < output.Length; i++){
 			output[i] = rowData[i];
-			Debug.Log(rowData[i].GetValue(0));
+			//Debug.Log(rowData[i].GetValue(0));
 			//rowData[i] = output[i];
 		}
 			
@@ -66,8 +68,8 @@ public class mng_csv : MonoBehaviour {
 	}
 
 	public void clearData(){
-		Debug.Log (rowData[0].GetValue(0));
-		Debug.Log (rowData[1].GetValue(0));
+		//Debug.Log (rowData[0].GetValue(0));
+		//Debug.Log (rowData[1].GetValue(0));
 		rowData.Clear ();
 	}
 }
