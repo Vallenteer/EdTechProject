@@ -22,4 +22,18 @@ public class anim_callscene : MonoBehaviour {
 	{
 		canvas.SetActive (false);
 	}
+
+	public void transisi(){
+		switch (sceneManager.LoadedLevel) {
+		case 1:
+			sceneManager.loadNextLevel (2);
+			break;
+		case 2:
+			sceneManager.loadNextLevel (3);
+			break;
+		case 3:
+			sceneManager.loadNextLevel (6);
+			break;
+		}
+	}
 }

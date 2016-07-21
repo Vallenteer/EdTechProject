@@ -13,6 +13,7 @@ public class mng_sceneManager : MonoBehaviour {
 
 	[Header("Passed Value")]
 	public int passed_score;
+	[SerializeField] public int LoadedLevel = 0;
 
 	static bool exist = false;
 
@@ -33,26 +34,31 @@ public class mng_sceneManager : MonoBehaviour {
 
 	public void loadNextLevel(int n){
 		//SceneManager.LoadScene (LevelScene [n - 1].name);
+
 		SceneManager.LoadScene (n);
 	}
 
 	public void loadGameOver(){
 		//SceneManager.LoadScene (GameOverScene.name);
+		LoadedLevel = 4;
 		SceneManager.LoadScene (4);
 	}
 
 	public void loadStoryScene(int n){
 		//SceneManager.LoadScene (StoryScene [n - 1].name);
+
 		SceneManager.LoadScene (n);
 	}
 
 	public void loadFinalScoreScene(){
 		//SceneManager.LoadScene (FinalScoreScene.name);
+		LoadedLevel = 4;
 		SceneManager.LoadScene (4);
 	}
 
 	public void loadMenuScene(){
 		//SceneManager.LoadScene (menuScene.name);
+		LoadedLevel = 0;
 		SceneManager.LoadScene (0);
 	}
 

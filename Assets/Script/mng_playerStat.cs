@@ -100,6 +100,7 @@ public class mng_playerStat : MonoBehaviour {
 			nextLevelToLoad++;
 		} else {
 			sceneScript.passed_score = score; //pass score
+			sceneScript.LoadedLevel=levelKe;
 			sceneScript.loadNextLevel (nextLevelToLoad);
 		}
 	}
