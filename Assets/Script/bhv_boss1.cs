@@ -8,6 +8,9 @@ public class bhv_boss1 : MonoBehaviour {
 
 	[Header("Ref")]
 	[SerializeField] GameObject manager;
+	[SerializeField] GameObject hitbyprojectile;
+	[SerializeField] GameObject playerhit;
+
 	mng_soalGenerator soalManager;
 	mng_playerStat statManager;
 	bhv_spawner spawnManager;
@@ -107,11 +110,13 @@ public class bhv_boss1 : MonoBehaviour {
 
 	void OnTriggerEnter2D(Collider2D other){
 		if (other.gameObject.CompareTag ("Player")) {
+			Instantiate (playerhit);
 			statManager.kurangNyawa();
 		}
 	}
 
 	void HitBoxHit(int carriedAnswer){ //Pass weakspotnya hit --> do something
+		Instantiate(hitbyprojectile);
 		if (soalManager.angkaJawab == carriedAnswer) {
 			statManager.tambahScore ();
 			soalManager.callBuatSoal ();

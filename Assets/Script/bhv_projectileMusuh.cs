@@ -16,14 +16,14 @@ public class bhv_projectileMusuh : MonoBehaviour {
 		statManager = manager.GetComponent<mng_playerStat> ();
 	}
 
-	void OnTriggerEnter2D(Collider2D other){
-		if (other.CompareTag ("Player")) {
+	void OnCollisionEnter2D(Collision2D other){
+		if (other.gameObject.CompareTag ("Player")) {
 			statManager.kurangNyawa ();
 			Instantiate (playerhit);
 			Destroy (this.gameObject);
 		}
 
-		if(other.CompareTag("Destroyer")){
+		if(other.gameObject.CompareTag("Destroyer")){
 			Destroy(this.gameObject);
 		}
 	}
